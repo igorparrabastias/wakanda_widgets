@@ -1,0 +1,28 @@
+{
+    "name": "InputText",
+    "studioName": "InputText",
+    "category": "Vegar Ringdal Widgets",
+    "iconPath": "/icons/widget.png",
+    "author": "Vegar Ringdal",
+    "contributors": [
+        "NA",
+        "NA"
+    ],
+    "version": "1.0.6",
+    "copyright": "(c) 2014 Vegar Ringdal",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/developer/Widget.git"
+    },
+    "keywords": ["wakanda", "widget"],
+    "engines": {"wakanda": ["10"]},
+    "license": "MIT",
+    "loadDependencies": [
+        {"id": "Widget_V2"},
+        {"id": "InputText/jqueryi18n.js", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "InputText/accounting.js", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "InputText/widget.js", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "InputText/css/widget.css", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "InputText/designer.js", "studioOnly": true, "version": "1.0.0", "path": "WIDGETS_CUSTOM"}
+    ]
+}

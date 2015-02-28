@@ -1,0 +1,220 @@
+﻿.waf-gridview {
+
+	border: 1px solid rgb(153, 153, 153);
+
+}
+
+
+
+.vr-widget-grid {
+    margin: 0;
+    padding: 0;
+    text-decoration: inherit;
+    font-family: 'Droid Serif', serif;
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+    -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow:hidden;
+    position: absolute;
+    height:100%;
+    width :100%;
+}
+
+.vr-widget-grid div.vr-widget-grid-header {
+     -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    overflow:hidden;
+    background-color: rgb(240, 240, 240);
+}
+
+
+
+.vr-widget-grid div.vr-widget-grid-header div.vr-widget-grid-row {
+     -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	overflow:hidden;
+	box-sizing: border-box;
+    position: absolute;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    background-color:inherit;
+}
+
+.vr-widget-grid div.vr-widget-grid-header div.vr-widget-grid-row-cell {
+/*	background-color: rgb(205, 197, 197);*/
+/*	background-color:inherit;*/
+	
+}
+
+
+
+
+
+.vr-widget-grid div.vr-widget-grid-body {
+     -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    height:100%;
+    width: 100%;
+	background-color:white;
+	
+
+    
+}
+
+.vr-widget-grid div.vr-widget-grid-footer {
+  
+    bottom: 0px;
+	box-shadow: inset 0 -1px 1px rgb(255, 255, 255);
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    
+    
+}
+
+.vr-widget-grid div.vr-widget-grid-body {
+
+    position: relative;
+	white-space: nowrap;
+
+
+    
+    
+}
+
+.vr-widget-grid div.vr-widget-grid-body div.vr-widget-grid-row {
+     -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+    position: absolute;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    overflow: hidden;
+}
+
+.vr-widget-grid-row-selected {
+    box-shadow: none;
+    background-color:LightSteelBlue !important;
+}
+
+
+.vr-widget-grid div.vr-widget-grid-body div.vr-widget-grid-row-even{
+    background-color: rgb(247, 247, 247);
+   
+    
+}
+
+.vr-widget-grid div.vr-widget-grid-body div.vr-widget-grid-row-alt{
+   background-color: rgb(255, 255, 255);
+    
+    
+}
+
+.vr-widget-grid-row-cell {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+    top:0px;
+    left:0px;
+    height:100%;
+    white-space: nowrap;
+    
+    text-overflow: ellipsis;
+/*    border-right: 1px solid rgb(230, 230, 230);*/
+    background-color:inherit;
+    float: left;
+	position: relative;
+	overflow: hidden;
+    
+}
+
+.vr-widget-grid-row-cell-header {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+    top:0px;
+    left:0px;
+    height:100%;
+    float:left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+/*    border-right: 1px solid rgb(204, 204, 204); this will mess up with jquery sortable*/ 
+	text-shadow: inherit;
+	color: inherit;
+	background-color:inherit;
+}
+
+.vr-widget-grid-row-cell > .content {
+	position: relative;
+	left: 0;
+	width: 100%;
+	 height: 100%; 
+	padding: 6px 5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-right: 1px solid rgb(230, 230, 230);
+	
+}
+
+.vr-widget-grid-row-cell-header > .content {
+	position: relative;
+	left: 0;
+	width: 100%;
+	 height: 100%; 
+	padding: 6px 5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-right: 1px solid rgb(204, 204, 204);
+	
+}
+
+
+.vr-widget-grid-editCell {
+	-webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+	border: 1px solid #00ff00 !important;
+/*	//height:100% !important;*/
+	
+
+.vr-widget-grid *:focus {
+    outline: 0 !important;
+}
+
+.vr-widget-grid-sortIcon {
+	width: 5px;	
+	float: right;	
+}

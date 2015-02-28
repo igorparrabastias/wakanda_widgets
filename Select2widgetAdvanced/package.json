@@ -1,0 +1,28 @@
+{
+    "name": "Select2widgetAdvanced",
+    "studioName": "Select2widgetAdvanced",
+    "category": "Vegar Ringdal Widgets",
+    "iconPath": "/icons/widget.png",
+    "author": "Vegar Ringdal",
+    "contributors": [
+        "Vegar Ringdal"
+    ],
+    "version": "1.0.6",
+    "copyright": "(c) 2014 Vegar Ringdal",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vegarringdal/Select2WidgetAdvanced"
+    },
+    "keywords": ["wakanda", "widget"],
+    "engines": {"wakanda": ["9", "10"]},
+    "license": "MIT",
+    "loadDependencies": [
+        {"id": "Widget_V2"},
+        {"id": "Select2widgetAdvanced/select/select2.js", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "Select2widgetAdvanced/mustache.js", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "Select2widgetAdvanced/select/select2.css", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "Select2widgetAdvanced/css/widget.css", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "Select2widgetAdvanced/widget.js", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},   
+        {"id": "Select2widgetAdvanced/designer.js", "studioOnly": true, "version": "1.0.0", "path": "WIDGETS_CUSTOM"}
+    ]
+}

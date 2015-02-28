@@ -1,0 +1,51 @@
+﻿{
+    "name": "GridView",
+    "studioName": "GridView",
+    "category": "Vegar Ringdal Widgets",
+    "iconPath": "/icons/widget.png",
+    "author": "Vegar Ringdal",
+    "contributors": ["Vegar Ringdal"],
+    "version": "2.0.18",
+    "copyright": "(c) 2014 Vegar Ringdal",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vegarringdal/GridView"
+    },
+    "keywords": ["wakanda", "widget"],
+    "engines": {
+        "wakanda": ["10"]
+    },
+    "license": "MIT",
+    "loadDependencies": [{
+        "id": "Widget_V2"
+    }, {
+        "id": "GridView/JavaScriptShim.js",
+        "version": "1.0.0",
+        "path": "WIDGETS_CUSTOM"
+    }, {
+        "id": "GridView/mustache.js",
+        "version": "1.0.0",
+        "path": "WIDGETS_CUSTOM"
+    }, {
+        "id": "GridView/vrWidgetGrid.js",
+        "version": "1.0.0",
+        "path": "WIDGETS_CUSTOM"
+    }, {
+        "id": "GridView/vrWidgetWafWrapper.js",
+        "version": "1.0.0",
+        "path": "WIDGETS_CUSTOM"
+    }, {
+        "id": "GridView/widget.js",
+        "version": "2.0.0",
+        "path": "WIDGETS_CUSTOM"
+    }, {
+        "id": "GridView/css/widget.css",
+        "version": "1.0.0",
+        "path": "WIDGETS_CUSTOM"
+    }, {
+        "id": "GridView/designer.js",
+        "studioOnly": true,
+        "version": "2.0.1",
+        "path": "WIDGETS_CUSTOM"
+    }]
+}

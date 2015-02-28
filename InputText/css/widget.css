@@ -1,0 +1,25 @@
+.waf-widget.waf-inputtext {
+
+}
+
+.waf-widget.waf-inputtext input {
+/*	height : 100%;*/
+/*	width: 100%;*/
+	
+}
+
+.waf-widget.waf-inputtext.no-resize {
+/*	height : 100%;*/
+/*	width: 100%;*/
+	resize: none;
+}
+
+
+.border {
+	height : 100%;
+	width: 100%;
+	
+	
+}
+
+.ui-datepicker{ z-index: 9999 !important;}
