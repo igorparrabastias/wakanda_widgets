@@ -44,6 +44,14 @@
                 this.build();
             }
         }),
+        activeScrollCache: widget.property({
+            type: "boolean",
+            defaultValue: false,
+            bindable: false,
+            onChange: function(x) {
+                //this.build();
+            }
+        }),
         readOnly: widget.property({
             type: "boolean",
             defaultValue: true,
@@ -189,6 +197,7 @@
                 rowheight: that.rowHeight(),
                 isMultiSelect: that.gridMultiselect(),
                 source: that.gridDataSource(),
+                activeScrollCache : false,
                 decimalType: that.desimalType(),
                 allowHighlight: that.allowClickAndHighlight(),
                 readOnly: that.readOnly(),

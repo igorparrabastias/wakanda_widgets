@@ -18,6 +18,7 @@
 * __row height__: Height of row
 * __footer height__: Height of footer
 * __header Click Sorting__: sort and add sort icon to header
+* __activeScrollCache__: if active it will try and fill cache mor e actively when scrolling (this will use more data, usefull if restcall is 200ms++)
 * __resizable Columns__: makes column resizable -PS! this part uses jQuery resizable
 * __sortable Columns__: makes column sortable/drag/drop -PS! this part uses jQuery sortable
 * __get data scroll delay__: How fast you want it to get data after scrollstop

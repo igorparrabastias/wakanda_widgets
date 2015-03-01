@@ -132,7 +132,9 @@
              *************************************************************************************/
             var html_fillData = function(type, no) {
 
-
+					
+					
+					
 
                     var i;
                     for (i = 0; i < vars.htmlCache.rowsArray.length; i++) {
@@ -533,6 +535,15 @@
                                     }
 
                                 }
+                                
+                                vars.htmlCache.rowsArray.sort(
+								 	function(a,b) { 
+								 	return parseInt(a.style.top.replace("px", "")) - parseInt(b.style.top.replace("px", "")) 
+								 });
+                                
+                                
+                                
+                                
                                 html_fillData();
                                 vars.scrollVars.halt = false;
                             }, vars.getDataScrollDelay);
@@ -578,6 +589,12 @@
                                         }
                                     }
                                 }
+                                
+                                vars.htmlCache.rowsArray.sort(
+								 	function(a,b) { 
+								 	return parseInt(a.style.top.replace("px", "")) - parseInt(b.style.top.replace("px", "")) 
+								 });
+                                
                             }
                         }
                     }
@@ -653,8 +670,10 @@
                                 if (!e.ctrlKey && !e.shiftKey) {
                                     currentKeyKode = "none";
                                 }
-                                if (currentKeyKode === "none") {
+                                if (currentKeyKode === "none") {                                       
                                     vars.configFunctions.select(currentRow);
+                                    //html_fillData("onlySelection");
+                                    
                                 }
                                 else {
                                     if (vars.selectionVars.lastKeyKodeUsed === "shift" && currentKeyKode === "ctrl") {

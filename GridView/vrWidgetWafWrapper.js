@@ -222,8 +222,11 @@
                         switch (attibuteType) {
                         case "number":
                         	var number = entity[attributeName]
+                        	if(number === null){
+                                number = 0;
+                            }
                             if (buildData.numberPrecision !== "-1" && entity !== null) {
-                                number = Math.round(entity[attributeName] * Math.pow(10, buildData.numberPrecision)) / Math.pow(10, buildData.numberPrecision)
+                                number = Math.round(number * Math.pow(10, buildData.numberPrecision)) / Math.pow(10, buildData.numberPrecision)
                                 number = number.toFixed(buildData.numberPrecision);
                             }
                             if (buildData.decimalType !== "-1" && entity !== null) {
@@ -323,6 +326,9 @@
                                     switch (attibuteType) {
                                     case "number":
                                     	if (buildData.decimalType !== "-1"){
+                                    		if(sourceValue === null){
+                                    			sourceValue = 0;
+                                    		}
                                         	sourceValue = sourceValue.replace(buildData.decimalType, ".");
                                         	myElement.innerHTML = Math.round(sourceValue * Math.pow(10, buildData.numberPrecision)) / Math.pow(10, buildData.numberPrecision);
                                     	}
@@ -486,11 +492,13 @@
                             //get data
                             getRestData(row, rowDiv, vars, templateFN, getRowTemplateFN);
                             //fill cache
-                            buildData.source.getElement(lastRowUpwards - pageSize / 2, {
-                                onSuccess: function(event) {
-                                    //nothing for now.. just cache function..
-                                }
-                            });
+                            if(buildData.activeScrollCache === true){
+	                            buildData.source.getElement(lastRowUpwards - pageSize / 2, {
+	                                onSuccess: function(event) {
+	                                    //nothing for now.. just cache function..
+	                                }
+	                            });
+                        	}
                         }
                         else {
                             //just get data, no need to prefill cache again
@@ -504,18 +512,22 @@
                         //first get row
                         getRestData(row, rowDiv, vars, templateFN, getRowTemplateFN);
                         //fill cache with more data
-                        buildData.source.getElement(row + pageSize, {
-                            onSuccess: function(event) {
-                                //nothing for now.. just cache function..
-                            }
-                        });
+                        if(buildData.activeScrollCache === true){
+	                        buildData.source.getElement(row + pageSize, {
+	                            onSuccess: function(event) {
+	                                //nothing for now.. just cache function..
+	                            }
+	                        });
+                    	}
                         if (bigScroll) {
                             //wanto cache upwards too
-                            buildData.source.getElement(row - pageSize, {
-                                onSuccess: function(event) {
-                                    //nothing for now.. just cache function..
-                                }
-                            });
+                            if(buildData.activeScrollCache === true){
+	                            buildData.source.getElement(row - pageSize, {
+	                                onSuccess: function(event) {
+	                                    //nothing for now.. just cache function..
+	                                }
+	                            });
+                        	}
                         }
                     }
                 },
