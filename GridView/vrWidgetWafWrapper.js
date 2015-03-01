@@ -194,7 +194,7 @@
                             }
                             else {
                             	if(buildSetupParams.isMultiSelect === false){
-                            		sel.mySel.reset("single");
+                            		sel.reset("single");
                             	}
                                 //sel = new WAF.Selection("single");
                             }
