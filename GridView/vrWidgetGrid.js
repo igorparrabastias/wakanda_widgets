@@ -1108,10 +1108,10 @@
                     html_fillData();
 
                     //this needs to trigger after the actuall class is created... so first time its not picked up by system
-                    setTimeout(function() {
-                        vars.configFunctions.event_onHeaderRebuild(vars.htmlCache.header.children[0], vars);
-                        event_ResizableColumns()
-                    }, 0);
+//                    setTimeout(function() {
+//                        vars.configFunctions.event_onHeaderRebuild(vars.htmlCache.header.children[0], vars);
+//                        event_ResizableColumns()
+//                    }, 0);
 
                 };
             //create grid

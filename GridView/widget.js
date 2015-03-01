@@ -197,7 +197,7 @@
                 rowheight: that.rowHeight(),
                 isMultiSelect: that.gridMultiselect(),
                 source: that.gridDataSource(),
-                activeScrollCache : false,
+                activeScrollCache : that.activeScrollCache(),
                 decimalType: that.desimalType(),
                 allowHighlight: that.allowClickAndHighlight(),
                 readOnly: that.readOnly(),
@@ -252,14 +252,12 @@
                     });
                 },
                 event_onCellHeaderDraw : function(columnNo, attributeName, headerName, div){
-                	//setTimeout(function(e){
                 	that.fire('cellHeaderDrawn', {
                         columnNo: columnNo,
                         attributeName: attributeName,
                         headerName : headerName,
                         div: div
                     });             		
-              //  },0)
                 },
                 event_onCellDraw: function(columnNo, attributeName, div, data, entity) {
                     that.fire('cellDrawn', {
@@ -273,6 +271,7 @@
                     });
                 }
             };
+			
 
             that.createdGrid = new VrWidgetGridWafWrapper(widgetJSData);
 
@@ -289,11 +288,16 @@
                 htmlCache.content.style.overflow = "hidden";
             };
             
+            
+            
+            
+            
+            
             if (!window.Designer) {
 	            if(that.gridDataSource().length >0){
 		            setTimeout(function(){
 		            	that.createdGrid.updateAllRows();
-		        	},0);
+		        	},50);
 	        	}
         	}
 
@@ -309,7 +313,10 @@
                 }, 500);
             }
             else {
-                that.build();
+            	 setTimeout(function() { //universal way of getting widget api to work, delay stuff...
+                    that.build();
+                }, 0);
+                //that.build();
             }
         }
     });

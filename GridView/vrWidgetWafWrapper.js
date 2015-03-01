@@ -188,14 +188,20 @@
                             }
                         }
                         else {
-                            if (buildSetupParams.isMultiSelect === true) {
+                        	sel = buildSetupParams.source.getSelection();
+                            if (buildSetupParams.isMultiSelect === true && !sel.isModeMultiple()) {
                                 sel = new WAF.Selection("multiple");
                             }
                             else {
-                                sel = new WAF.Selection("single");
+                            	if(buildSetupParams.isMultiSelect === false){
+                            		sel.mySel.reset("single");
+                            	}
+                                //sel = new WAF.Selection("single");
                             }
                             buildSetupParams.source.setSelection(sel);
-                            sel.select(buildData.source.getPosition());
+                            if(sel.getSelectedRows().length === 0){
+                            	sel.select(buildData.source.getPosition());
+                        	}
                         }
                     }
                 };
