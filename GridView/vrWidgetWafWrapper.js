@@ -1,4 +1,4 @@
-﻿WAF.define('VrWidgetGridWafWrapper', ['waf-core/widget','VrWidgetGrid'], function(widget,VrWidgetGrid) {
+﻿WAF.define('VrWidgetGridWafWrapper', ['waf-core/widget', 'VrWidgetGrid'], function(widget, VrWidgetGrid) {
 
 
     /****************************************************************************************************************
@@ -15,117 +15,121 @@
             var dataSourceListnerID = null;
             var sel;
 
-			
-			
-			//TODO: improve, but atleast there is sorting in the grid for v2
-			var sortHelper = {};
-			sortHelper.lastSortSource = null;
-			sortHelper.lastSortAttr = null;
-			sortHelper.lastSortType = null;
-			sortHelper.lastDiv = null;
-			sortHelper.aboutToSort = false;
-			sortHelper.sort = function(element) {
-				//debugger;
-			    var curSortSource = buildData.source._private.id;
-			    var curSortAttr = element.getAttribute("datasourceattribute")
-			    if (element.className === "content" && curSortAttr !== null && curSortAttr !== undefined) {                	
-				    var next
-				    if (curSortSource !== sortHelper.lastSortSource) {
-				        sortHelper.lastSortType = "asc";
-				    }
-				    else {
-				        if (curSortAttr !== sortHelper.lastSortAttr) {
-				            sortHelper.lastSortType = "asc";
-				        }
-				        else {
-				            if (sortHelper.lastSortType === "desc") {
-				                sortHelper.lastSortType = "asc";
-				            }
-				            else {
-				                sortHelper.lastSortType = "desc"
-				            }
-				        }
-				    }
-				    sortHelper.lastSortSource = curSortSource;
-				    sortHelper.lastSortAttr = curSortAttr;
-					sortHelper.aboutToSort = true
-				    buildData.source.orderBy(curSortAttr + " " + sortHelper.lastSortType,{
-				    	onSuccess:function(){
-							sortHelper.aboutToSort = false;
-				    		//get old div and remove icon
-						    if(sortHelper.lastDiv !== null){
-						        var oldDivContent = sortHelper.lastDiv.innerHTML;
-						        oldDivContent = oldDivContent.replace("▼", "");
-						        oldDivContent = oldDivContent.replace("▲", "");
-						        sortHelper.lastDiv.innerHTML = oldDivContent;
-						    }
-						    //get new div, and content, and set it as the new old
-						    var old = element.innerHTML;
-						    sortHelper.lastDiv = element
 
-						    if(sortHelper.lastSortType === "asc"){
-						        element.innerHTML = old +"▼";
-						    } else {
-						        element.innerHTML = old+"▲";
-						    }
-				    		
-				    		
-				    	},onError:function(){
-				    		//todo
-				    		
-				    		
-				    	}});
 
-				    
-				}
+            //TODO: improve, but atleast there is sorting in the grid for v2
+            var sortHelper = {};
+            sortHelper.lastSortSource = null;
+            sortHelper.lastSortAttr = null;
+            sortHelper.lastSortType = null;
+            sortHelper.lastDiv = null;
+            sortHelper.aboutToSort = false;
+            sortHelper.sort = function(element) {
+                //debugger;
+                var curSortSource = buildData.source._private.id;
+                var curSortAttr = element.getAttribute("datasourceattribute")
+                if (element.className === "content" && curSortAttr !== null && curSortAttr !== undefined) {
+                    var next
+                    if (curSortSource !== sortHelper.lastSortSource) {
+                        sortHelper.lastSortType = "asc";
+                    }
+                    else {
+                        if (curSortAttr !== sortHelper.lastSortAttr) {
+                            sortHelper.lastSortType = "asc";
+                        }
+                        else {
+                            if (sortHelper.lastSortType === "desc") {
+                                sortHelper.lastSortType = "asc";
+                            }
+                            else {
+                                sortHelper.lastSortType = "desc"
+                            }
+                        }
+                    }
+                    sortHelper.lastSortSource = curSortSource;
+                    sortHelper.lastSortAttr = curSortAttr;
+                    sortHelper.aboutToSort = true
+                    buildData.source.orderBy(curSortAttr + " " + sortHelper.lastSortType, {
+                        onSuccess: function() {
+                            sortHelper.aboutToSort = false;
+                            //get old div and remove icon
+                            if (sortHelper.lastDiv !== null) {
+                                var oldDivContent = sortHelper.lastDiv.innerHTML;
+                                oldDivContent = oldDivContent.replace("▼", "");
+                                oldDivContent = oldDivContent.replace("▲", "");
+                                sortHelper.lastDiv.innerHTML = oldDivContent;
+                            }
+                            //get new div, and content, and set it as the new old
+                            var old = element.innerHTML;
+                            sortHelper.lastDiv = element
 
-			}
-			sortHelper.sortRebuilder = function(headerRow){
-				var elements = headerRow.getElementsByClassName("content");
-				if(sortHelper.lastSortAttr !== null){
-					for(var i = 0; i < elements.length; i++){
-						var curSortAttr = elements[i].getAttribute("datasourceattribute")
-			   			if (elements[i].className === "content" && curSortAttr === sortHelper.lastSortAttr) {
-			   				var old = elements[i].innerHTML;
-			   				if(sortHelper.lastSortType === "asc"){
-						        elements[i].innerHTML = old +"▼";
-						    } else {
-						        elements[i].innerHTML = old +"▲";
-						    }
-						    sortHelper.lastDiv = elements[i]
-			   			} else {
-			   				if(elements[i].className === "content"){
-			   					var oldDivContent = elements[i].innerHTML;
-						        oldDivContent = oldDivContent.replace("▼", "");
-						        oldDivContent = oldDivContent.replace("▲", "");
-						        elements[i].innerHTML = oldDivContent;
-			   					
-			   				}
-			   			}
-					}
-				}			
-			};
-			
-			sortHelper.clear = function(){
-				sortHelper.lastSortSource = null;
-				sortHelper.lastSortAttr = null;
-				sortHelper.lastSortType = null;
-				sortHelper.lastDiv = null;
-				
-				
-				
-			};
-			
-			
-			
-			
-			
+                            if (sortHelper.lastSortType === "asc") {
+                                element.innerHTML = old + "▼";
+                            }
+                            else {
+                                element.innerHTML = old + "▲";
+                            }
+
+
+                        },
+                        onError: function() {
+                            //todo
+
+                        }
+                    });
+
+
+                }
+
+            }
+            sortHelper.sortRebuilder = function(headerRow) {
+                var elements = headerRow.getElementsByClassName("content");
+                if (sortHelper.lastSortAttr !== null) {
+                    for (var i = 0; i < elements.length; i++) {
+                        var curSortAttr = elements[i].getAttribute("datasourceattribute")
+                        if (elements[i].className === "content" && curSortAttr === sortHelper.lastSortAttr) {
+                            var old = elements[i].innerHTML;
+                            if (sortHelper.lastSortType === "asc") {
+                                elements[i].innerHTML = old + "▼";
+                            }
+                            else {
+                                elements[i].innerHTML = old + "▲";
+                            }
+                            sortHelper.lastDiv = elements[i]
+                        }
+                        else {
+                            if (elements[i].className === "content") {
+                                var oldDivContent = elements[i].innerHTML;
+                                oldDivContent = oldDivContent.replace("▼", "");
+                                oldDivContent = oldDivContent.replace("▲", "");
+                                elements[i].innerHTML = oldDivContent;
+
+                            }
+                        }
+                    }
+                }
+            };
+
+            sortHelper.clear = function() {
+                sortHelper.lastSortSource = null;
+                sortHelper.lastSortAttr = null;
+                sortHelper.lastSortType = null;
+                sortHelper.lastDiv = null;
+
+
+
+            };
+
+
+
+
+
 
             /**************************************************************************************
              * for when in studio/no datasource linked
              *************************************************************************************/
             var setSource = function(buildSetupParams, keepOldSelection) {
-            	
+
                     var dummyData = {
                         getElement: function(row, obj, data) {
                             var DummyObj = {};
@@ -166,8 +170,8 @@
                         _private: {
                             minPageSize: 40
                         },
-                        countSelected : function(){
-                        	return 1;
+                        countSelected: function() {
+                            return 1;
                         },
                         addListener: function() {}
                     };
@@ -188,20 +192,20 @@
                             }
                         }
                         else {
-                        	sel = buildSetupParams.source.getSelection();
+                            sel = buildSetupParams.source.getSelection();
                             if (buildSetupParams.isMultiSelect === true && !sel.isModeMultiple()) {
                                 sel = new WAF.Selection("multiple");
                             }
                             else {
-                            	if(buildSetupParams.isMultiSelect === false){
-                            		sel.reset("single");
-                            	}
+                                if (buildSetupParams.isMultiSelect === false) {
+                                    sel.reset("single");
+                                }
                                 //sel = new WAF.Selection("single");
                             }
                             buildSetupParams.source.setSelection(sel);
-                            if(sel.getSelectedRows().length === 0){
-                            	sel.select(buildData.source.getPosition());
-                        	}
+                            if (sel.getSelectedRows().length === 0) {
+                                sel.select(buildData.source.getPosition());
+                            }
                         }
                     }
                 };
@@ -227,8 +231,8 @@
                         var attibuteType = buildData.source._private.atts[attributeName].type;
                         switch (attibuteType) {
                         case "number":
-                        	var number = entity[attributeName]
-                        	if(number === null){
+                            var number = entity[attributeName]
+                            if (number === null) {
                                 number = 0;
                             }
                             if (buildData.numberPrecision !== "-1" && entity !== null) {
@@ -239,7 +243,7 @@
                                 number = number.toString().replace(".", buildData.decimalType);
                             }
                             entity[attributeName] = number;
-                            
+
                             break;
                         case "date":
                             if (buildData.dateFormat !== "-1" && entity !== null) {
@@ -258,7 +262,7 @@
              *************************************************************************************/
             var params = {
                 id: buildData.id,
-                node : buildData.node,
+                node: buildData.node,
                 headerHeight: buildData.headerHeight,
                 footerHeight: buildData.footerHeight,
                 rowheight: buildData.rowheight,
@@ -267,42 +271,44 @@
                 attributeNames: buildData.attributeNames,
                 lockedColumns: buildData.lockedColumns,
                 isMultiSelect: buildData.isMultiSelect,
-                sortableColumns : buildData.sortableColumns,
-                resizableColumns : buildData.resizableColumns,
-                getDataScrollDelay : buildData.getDataScrollDelay,
-                event_onHeaderRebuild : function (headerRow, vars){
-                	
-                	for (var i = 0; i < vars.attributeNames.length; i++) {
-		                buildData.event_onCellHeaderDraw(i, vars.attributeNames[i], vars.headerNames[i], headerRow.children[i])
-		            }
-                	
-                	//sets sorticon back
-                	sortHelper.sortRebuilder(headerRow);
-                	
-                	
+                sortableColumns: buildData.sortableColumns,
+                resizableColumns: buildData.resizableColumns,
+                getDataScrollDelay: buildData.getDataScrollDelay,
+                event_onHeaderRebuild: function(headerRow, vars) {
+
+                    for (var i = 0; i < vars.attributeNames.length; i++) {
+                        buildData.event_onCellHeaderDraw(i, vars.attributeNames[i], vars.headerNames[i], headerRow.children[i])
+                    }
+
+                    //sets sorticon back
+                    sortHelper.sortRebuilder(headerRow);
+
+
                 },
                 event_onRowClick: buildData.event_onRowClick,
                 event_onRowDoubleClick: function(e) {
                     var that = this;
-                    if(e.ctrlKey === false){
-                    	buildData.event_onRowDoubleClick(e);
-                	}
-                    
+                    if (e.ctrlKey === false) {
+                        buildData.event_onRowDoubleClick(e);
+                    }
+
                     try {
                         var myElement = e.target;
                         if (myElement.className === "content") {
-                        	var enterHit = false;
+                            var enterHit = false;
                             var attributeName = myElement.getAttribute("datasourceattribute")
                             var oldValue = myElement.innerHTML
-							try{
-                            var attibuteType = buildData.source._private.atts[attributeName].type;
-                        } catch(e){}
+                            try {
+                                var attibuteType = buildData.source._private.atts[attributeName].type;
+                            }
+                            catch (e) {}
                             switch (attibuteType) {
                             case "number":
-                            	if (buildData.decimalType !== "-1"){
-                                	myElement.innerHTML = buildData.source[attributeName].toString().replace(".", buildData.decimalType);
-                                } else {
-                                	myElement.innerHTML = buildData.source[attributeName];
+                                if (buildData.decimalType !== "-1") {
+                                    myElement.innerHTML = buildData.source[attributeName].toString().replace(".", buildData.decimalType);
+                                }
+                                else {
+                                    myElement.innerHTML = buildData.source[attributeName];
                                 }
                                 break;
                             case "date":
@@ -327,29 +333,29 @@
                                 myElement.classList.remove("vr-widget-grid-editCell");
                                 var newValue = myElement.innerHTML;
                                 if (oldValue !== newValue && enterHit === false) {
-                                	enterHit = true;
+                                    enterHit = true;
                                     var sourceValue = newValue;
                                     switch (attibuteType) {
                                     case "number":
-                                    	if (buildData.decimalType !== "-1"){
-                                    		if(sourceValue === null){
-                                    			sourceValue = 0;
-                                    		}
-                                        	sourceValue = sourceValue.replace(buildData.decimalType, ".");
-                                        	myElement.innerHTML = Math.round(sourceValue * Math.pow(10, buildData.numberPrecision)) / Math.pow(10, buildData.numberPrecision);
-                                    	}
+                                        if (buildData.decimalType !== "-1") {
+                                            if (sourceValue === null) {
+                                                sourceValue = 0;
+                                            }
+                                            sourceValue = sourceValue.replace(buildData.decimalType, ".");
+                                            myElement.innerHTML = Math.round(sourceValue * Math.pow(10, buildData.numberPrecision)) / Math.pow(10, buildData.numberPrecision);
+                                        }
                                         break;
                                     case "date":
-                                    	if (buildData.dateFormat !== "-1"){
-                                        	sourceValue = new Date($.datepicker.parseDate(buildData.dateFormat, sourceValue).toString());
-                                        	myElement.innerHTML = $.datepicker.formatDate(buildData.dateFormat, sourceValue);
+                                        if (buildData.dateFormat !== "-1") {
+                                            sourceValue = new Date($.datepicker.parseDate(buildData.dateFormat, sourceValue).toString());
+                                            myElement.innerHTML = $.datepicker.formatDate(buildData.dateFormat, sourceValue);
                                         }
                                         break;
                                     default:
                                     }
-                                    if(buildData.readOnly === false){
-                                    	buildData.source[attributeName] = sourceValue;
-                                	}
+                                    if (buildData.readOnly === false) {
+                                        buildData.source[attributeName] = sourceValue;
+                                    }
                                     buildData.source.autoDispatch(); //if local source then I need to rethink this..
                                     if (buildData.source.sync !== undefined) { //local source							
                                         if (buildData.source.getScope() === "global") {
@@ -423,23 +429,23 @@
                                 }
                             selectText(myElement);
                         }
-                        
-                        	
+
+
 
 
                     }
                     catch (e) {
-                       // console.log("vrWidgetGrid:error updating source"); //this is mostly helper function during development, should be disabled in production
+                        // console.log("vrWidgetGrid:error updating source"); //this is mostly helper function during development, should be disabled in production
                     }
 
-                    
+
                 },
                 event_onRowRightClick: buildData.event_onRowRightClick,
-                event_onHeaderRowClick: function(e){
-                	if(buildData.simpleAttributeSorting){
-                		sortHelper.sort(e.target);
-                	}
-                	buildData.event_onHeaderRowClick(e);                	
+                event_onHeaderRowClick: function(e) {
+                    if (buildData.simpleAttributeSorting) {
+                        sortHelper.sort(e.target);
+                    }
+                    buildData.event_onHeaderRowClick(e);
                 },
                 event_onHeaderRowDoubleClick: buildData.event_onHeaderRowDoubleClick,
                 event_onHeaderRowRightClick: buildData.event_onHeaderRowRightClick,
@@ -472,16 +478,16 @@
                                     if (xRow === event.userData[0] && buildData.source.length > 0) {
                                         var xTemp = event.userData[3](event.userData[4](event.element, vars.attributeNames), event.element, vars.attributeNames);
 
-                                            event.userData[1].innerHTML = xTemp;
-                                            //trigger cellDraw event
-                                            for (var i = 0; i < vars.attributeNames.length; i++) {
-                                                var data = null;
-                                                if (event.element !== null) {
-                                                    data = event.element[vars.attributeNames[i]]
-                                                }
-                                                buildData.event_onCellDraw(i, vars.attributeNames[i], event.userData[1].children[i], data, event.element)
+                                        event.userData[1].innerHTML = xTemp;
+                                        //trigger cellDraw event
+                                        for (var i = 0; i < vars.attributeNames.length; i++) {
+                                            var data = null;
+                                            if (event.element !== null) {
+                                                data = event.element[vars.attributeNames[i]]
                                             }
-                                       
+                                            buildData.event_onCellDraw(i, vars.attributeNames[i], event.userData[1].children[i], data, event.element)
+                                        }
+
                                     }
                                 },
                                 onError: function(err) {
@@ -498,13 +504,13 @@
                             //get data
                             getRestData(row, rowDiv, vars, templateFN, getRowTemplateFN);
                             //fill cache
-                            if(buildData.activeScrollCache === true){
-	                            buildData.source.getElement(lastRowUpwards - pageSize / 2, {
-	                                onSuccess: function(event) {
-	                                    //nothing for now.. just cache function..
-	                                }
-	                            });
-                        	}
+                            if (row > pageSize * 2) {
+                                buildData.source.getElement(lastRowUpwards - pageSize / 2, {
+                                    onSuccess: function(event) {
+                                        //nothing for now.. just cache function..
+                                    }
+                                });
+                            }
                         }
                         else {
                             //just get data, no need to prefill cache again
@@ -518,22 +524,22 @@
                         //first get row
                         getRestData(row, rowDiv, vars, templateFN, getRowTemplateFN);
                         //fill cache with more data
-                        if(buildData.activeScrollCache === true){
-	                        buildData.source.getElement(row + pageSize, {
-	                            onSuccess: function(event) {
-	                                //nothing for now.. just cache function..
-	                            }
-	                        });
-                    	}
+                        buildData.source.getElement(row + pageSize / 2, {
+                            onSuccess: function(event) {
+                                //nothing for now.. just cache function..
+                            }
+                        });
+
                         if (bigScroll) {
                             //wanto cache upwards too
-                            if(buildData.activeScrollCache === true){
-	                            buildData.source.getElement(row - pageSize, {
-	                                onSuccess: function(event) {
-	                                    //nothing for now.. just cache function..
-	                                }
-	                            });
-                        	}
+                            if (row > pageSize * 2) {
+                                buildData.source.getElement(lastRowUpwards - pageSize / 2, {
+                                    onSuccess: function(event) {
+                                        //nothing for now.. just cache function..
+                                    }
+                                });
+                            }
+
                         }
                     }
                 },
@@ -582,18 +588,18 @@
                     dataSourceListnerID = buildData.source.addListener("all", function(e) {
                         switch (e.eventKind) {
                         case "onCollectionChange":
-                        	if(sortHelper.aboutToSort === false){
-                        		sortHelper.clear()
-               					myGrid.updateHeaderTemplate();
-                        	} 
-                        
-                        
-                        	sel = buildData.source.getSelection();
-                        	if(sel.getSelectedRows().length === 0){
-                            	sel.select(buildData.source.getPosition());
-                            	
-                        	}
-                        	myGrid.setlastSlectedRow(buildData.source.getPosition())
+                            if (sortHelper.aboutToSort === false) {
+                                sortHelper.clear()
+                                myGrid.updateHeaderTemplate();
+                            }
+
+
+                            sel = buildData.source.getSelection();
+                            if (sel.getSelectedRows().length === 0) {
+                                sel.select(buildData.source.getPosition());
+
+                            }
+                            myGrid.setlastSlectedRow(buildData.source.getPosition())
                             myGrid.adjustScollBody();
                             if (buildData.source.isNewElement()) {
                                 myGrid.scrollTopRow(buildData.source.getPosition());
@@ -610,7 +616,7 @@
                             if (myGrid.isHighlighting() === false) {
                                 sel.select(buildData.source._private.currentElemPos);
                                 myGrid.updateAllRows("onlySelection");
-                            } 
+                            }
                             myGrid.scrollTopRow(buildData.source.getPosition());
                             if (skipEvent === false) {
                                 myGrid.updateAllRows();
@@ -618,7 +624,7 @@
                             setFooterData(myGrid.setFooterHtml);
                             break;
                         case "onAttributeChange":
-                            myGrid.updateAllRows("onlyOne",e.dataSource.getPosition());//just current entity
+                            myGrid.updateAllRows("onlyOne", e.dataSource.getPosition()); //just current entity
                             break;
                         case "onSelectionChange":
                             if (skipEvent === false) {
@@ -636,7 +642,7 @@
                                             skipEvent = true;
                                             buildData.source.save({
                                                 onSuccess: function(e) {
-                                                	skipEvent = false;
+                                                    skipEvent = false;
                                                     //do the server refresh
                                                 },
                                                 onError: function(err) {
@@ -657,12 +663,12 @@
                             break;
                         case "onElementSaved":
                             if (buildData.refreshAfterAutoSave === true) {
-                            	
-                            	var rowNum = e.position;
-                            	
+
+                                var rowNum = e.position;
+
                                 e.serverRefresh({
                                     onSuccess: function(e) {
-                                        myGrid.updateAllRows("onlyOne",e.position );//just entity row
+                                        myGrid.updateAllRows("onlyOne", e.position); //just entity row
                                     },
                                     onError: function(err) {
                                         //todo, this will break use outside waf, better have autoSave as option, maybe add this to fakedataprovider also
@@ -673,14 +679,14 @@
                                     }
                                 }); //end server Refresh()
                             }
-                           	myGrid.updateAllRows("onlyOne",e.position );//just entity row
+                            myGrid.updateAllRows("onlyOne", e.position); //just entity row
                             break;
                         }
                     });
                 };
             addDatasourceListners();
 
-			setFooterData(myGrid.setFooterHtml);
+            setFooterData(myGrid.setFooterHtml);
 
             /**************************************************************************************
              * public functions
@@ -695,10 +701,10 @@
             this.getColumnSetup = function() {
                 return myGrid.getColumnSetup();
             };
-            
-            
-            this.getHtmlCache = function(){
-            	return myGrid.getHtmlCache();
+
+
+            this.getHtmlCache = function() {
+                return myGrid.getHtmlCache();
             };
 
             this.setColumnSetup = function(columnsObj) {
@@ -714,7 +720,7 @@
             };
 
             this.setSource = function(newSource, keepOldSelection) {
-            	sortHelper.clear();
+                sortHelper.clear();
                 buildData.source.removeListener({
                     ID: dataSourceListnerID
                 });
@@ -726,20 +732,20 @@
                 setFooterData(myGrid.setFooterHtml);
             }
 
-			this.resetSortIcons = function(){
-				sortHelper.clear();
-			}
+            this.resetSortIcons = function() {
+                sortHelper.clear();
+            }
 
-			this.onDestory = function(){
-				 buildData.source.removeListener({
+            this.onDestory = function() {
+                buildData.source.removeListener({
                     ID: dataSourceListnerID
                 });
-			}
-			
-			
-			this.updateAllRows = function(){
-				myGrid.updateAllRows();
-			}
+            }
+
+
+            this.updateAllRows = function() {
+                myGrid.updateAllRows();
+            }
 
         }; //end
     return VrWidgetGridWafWrapper;

@@ -2,10 +2,9 @@
 
 
     //waf-studio-donotsave
-
     var GridView = widget.create('GridView', {
 
-		gridDataSource: widget.property({
+        gridDataSource: widget.property({
             type: 'datasource',
             onChange: function(x) {
                 this.build();
@@ -42,14 +41,6 @@
             bindable: false,
             onChange: function(x) {
                 this.build();
-            }
-        }),
-        activeScrollCache: widget.property({
-            type: "boolean",
-            defaultValue: false,
-            bindable: false,
-            onChange: function(x) {
-                //this.build();
             }
         }),
         readOnly: widget.property({
@@ -197,16 +188,16 @@
                 rowheight: that.rowHeight(),
                 isMultiSelect: that.gridMultiselect(),
                 source: that.gridDataSource(),
-                activeScrollCache : that.activeScrollCache(),
+
                 decimalType: that.desimalType(),
                 allowHighlight: that.allowClickAndHighlight(),
                 readOnly: that.readOnly(),
                 autoSave: that.autoSave(),
-                getDataScrollDelay : that.getDataScrollDelay(),
+                getDataScrollDelay: that.getDataScrollDelay(),
                 refreshAfterAutoSave: that.refreshAfterAutoSave(),
-                sortableColumns : that.sortableColumns(),
-                resizableColumns : that.resizableColumns(),
-                simpleAttributeSorting : that.headerClickSorting(),
+                sortableColumns: that.sortableColumns(),
+                resizableColumns: that.resizableColumns(),
+                simpleAttributeSorting: that.headerClickSorting(),
                 //this is useless atm
                 dateFormat: that.dateFormat(),
                 numberPrecision: that.numberRounding(),
@@ -251,13 +242,13 @@
                         event: e
                     });
                 },
-                event_onCellHeaderDraw : function(columnNo, attributeName, headerName, div){
-                	that.fire('cellHeaderDrawn', {
+                event_onCellHeaderDraw: function(columnNo, attributeName, headerName, div) {
+                    that.fire('cellHeaderDrawn', {
                         columnNo: columnNo,
                         attributeName: attributeName,
-                        headerName : headerName,
+                        headerName: headerName,
                         div: div
-                    });             		
+                    });
                 },
                 event_onCellDraw: function(columnNo, attributeName, div, data, entity) {
                     that.fire('cellDrawn', {
@@ -271,7 +262,7 @@
                     });
                 }
             };
-			
+
 
             that.createdGrid = new VrWidgetGridWafWrapper(widgetJSData);
 
@@ -287,19 +278,19 @@
                 htmlCache.content.style.overflowX = "";
                 htmlCache.content.style.overflow = "hidden";
             };
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
             if (!window.Designer) {
-	            if(that.gridDataSource().length >0){
-		            setTimeout(function(){
-		            	that.createdGrid.updateAllRows();
-		        	},50);
-	        	}
-        	}
+                if (that.gridDataSource().length > 0) {
+                    setTimeout(function() {
+                        that.createdGrid.updateAllRows();
+                    }, 50);
+                }
+            }
 
 
 
@@ -313,7 +304,7 @@
                 }, 500);
             }
             else {
-            	 setTimeout(function() { //universal way of getting widget api to work, delay stuff...
+                setTimeout(function() { //universal way of getting widget api to work, delay stuff...
                     that.build();
                 }, 0);
                 //that.build();
@@ -329,18 +320,18 @@
         this.$super('destroy')();
     };
 
-	
-	GridView.prototype.setSource = function(newSource, keepOldSelection) {
-		this.createdGrid.setSource(newSource, keepOldSelection);
-	}
-	
-	GridView.prototype.getColumnSetup = function() {
-		this.createdGrid.getColumnSetup();
-	}
 
-	GridView.prototype.setColumnSetup = function(columnsObj) {
-		this.createdGrid.setColumnSetup(columnsObj);
-	}
+    GridView.prototype.setSource = function(newSource, keepOldSelection) {
+        this.createdGrid.setSource(newSource, keepOldSelection);
+    }
+
+    GridView.prototype.getColumnSetup = function() {
+        this.createdGrid.getColumnSetup();
+    }
+
+    GridView.prototype.setColumnSetup = function(columnsObj) {
+        this.createdGrid.setColumnSetup(columnsObj);
+    }
 
 
 

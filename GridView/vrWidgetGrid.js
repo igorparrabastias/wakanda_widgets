@@ -132,9 +132,9 @@
              *************************************************************************************/
             var html_fillData = function(type, no) {
 
-					
-					
-					
+
+
+
 
                     var i;
                     for (i = 0; i < vars.htmlCache.rowsArray.length; i++) {
@@ -163,7 +163,12 @@
                             }
                             else {
                                 var row = vars.htmlCache.rowsArray[i];
-                                vars.configFunctions.getDataElement(currentRow, row, html_insertTemplate, vars.configFunctions.getRowTemplate, vars, true);
+                                if (type === "bigScroll") {
+                                    vars.configFunctions.getDataElement(currentRow, row, html_insertTemplate, vars.configFunctions.getRowTemplate, vars, true, true);
+                                }
+                                else {
+                                    vars.configFunctions.getDataElement(currentRow, row, html_insertTemplate, vars.configFunctions.getRowTemplate, vars, true, false);
+                                }
                                 if (vars.configFunctions.isSelected(currentRow)) {
                                     row.classList.add(vars.css.css_rowSelected);
                                 }
@@ -235,7 +240,7 @@
              * gets the main div to create grid in
              *************************************************************************************/
             var html_GetGridWrapper = function() {
-                    vars.htmlCache.grid = vars.node ////document.getElementById(vars.id);
+                    vars.htmlCache.grid = vars.node; ////document.getElementById(vars.id);
                     vars.htmlCache.grid.className = vars.css.css_wrapper;
                     //get default height and width
                     vars.gridHeight = vars.htmlCache.grid.clientHeight;
@@ -381,10 +386,10 @@
             var html_addRows = function() {
                     var minimumRowsNeeded = parseInt(vars.contentHeight / vars.rowHeight, 10);
                     if (minimumRowsNeeded % 2 === 1) {
-                        minimumRowsNeeded = minimumRowsNeeded + 15;
+                        minimumRowsNeeded = minimumRowsNeeded + 7;
                     }
                     else {
-                        minimumRowsNeeded = minimumRowsNeeded + 14;
+                        minimumRowsNeeded = minimumRowsNeeded + 6;
                     }
                     var top = 0;
                     var i = 0;
@@ -535,16 +540,17 @@
                                     }
 
                                 }
-                                
+
                                 vars.htmlCache.rowsArray.sort(
-								 	function(a,b) { 
-								 	return parseInt(a.style.top.replace("px", "")) - parseInt(b.style.top.replace("px", "")) 
-								 });
-                                
-                                
-                                
-                                
-                                html_fillData();
+
+                                function(a, b) {
+                                    return parseInt(a.style.top.replace("px", "")) - parseInt(b.style.top.replace("px", ""))
+                                });
+
+
+
+
+                                html_fillData("bigScroll");
                                 vars.scrollVars.halt = false;
                             }, vars.getDataScrollDelay);
                         }
@@ -589,12 +595,13 @@
                                         }
                                     }
                                 }
-                                
+
                                 vars.htmlCache.rowsArray.sort(
-								 	function(a,b) { 
-								 	return parseInt(a.style.top.replace("px", "")) - parseInt(b.style.top.replace("px", "")) 
-								 });
-                                
+
+                                function(a, b) {
+                                    return parseInt(a.style.top.replace("px", "")) - parseInt(b.style.top.replace("px", ""))
+                                });
+
                             }
                         }
                     }
@@ -622,7 +629,6 @@
                         }
                     } // end check scroll type
                 }; //end scroll event
-
 
             /**************************************************************************************
              * fixes highlisgt and select
@@ -670,10 +676,9 @@
                                 if (!e.ctrlKey && !e.shiftKey) {
                                     currentKeyKode = "none";
                                 }
-                                if (currentKeyKode === "none") {                                       
+                                if (currentKeyKode === "none") {
                                     vars.configFunctions.select(currentRow);
                                     //html_fillData("onlySelection");
-                                    
                                 }
                                 else {
                                     if (vars.selectionVars.lastKeyKodeUsed === "shift" && currentKeyKode === "ctrl") {
@@ -1070,7 +1075,7 @@
                     vars.htmlCache.header.addEventListener("click", event_onSingleClickHeaderRow);
 
 
-                    //event_ResizableColumns(); //this uses jquery!
+
                     event_SortableColumns(); //this uses jquery!
                 };
 
@@ -1101,17 +1106,10 @@
             var init = function() {
                     //add html
                     html_addHtml();
-
                     //add events
                     event_addEvents();
                     //fillData
                     html_fillData();
-
-                    //this needs to trigger after the actuall class is created... so first time its not picked up by system
-//                    setTimeout(function() {
-//                        vars.configFunctions.event_onHeaderRebuild(vars.htmlCache.header.children[0], vars);
-//                        event_ResizableColumns()
-//                    }, 0);
 
                 };
             //create grid
@@ -1159,7 +1157,7 @@
             //setting scrollheight when on elelment chnaged eetc
             this.scrollTopRow = function(row) {
                 var curentScrollTop = vars.htmlCache.content.scrollTop;
-                var scrollContentHeight = vars.htmlCache.content.scrollTop + vars.htmlCache.content.offsetHeight-vars.rowHeight;
+                var scrollContentHeight = vars.htmlCache.content.scrollTop + vars.htmlCache.content.offsetHeight - vars.rowHeight;
                 var nextTop = row * vars.rowHeight;
                 if (curentScrollTop < nextTop && nextTop > scrollContentHeight) {
                     vars.htmlCache.content.scrollTop = row * vars.rowHeight;
