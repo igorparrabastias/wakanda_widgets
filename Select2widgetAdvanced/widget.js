@@ -50,7 +50,7 @@ WAF.define('Select2widgetAdvanced', ['waf-core/widget', 'vrSelect2', 'VRmustache
 
         onlyDropDown: widget.property({
             type: "boolean",
-            defaultValue: "true",
+            defaultValue: true,
             bindable: false,
             onChange: function(x) {
 
@@ -61,7 +61,7 @@ WAF.define('Select2widgetAdvanced', ['waf-core/widget', 'vrSelect2', 'VRmustache
         }),
         overRideEvent: widget.property({
             type: "boolean",
-            defaultValue: "false",
+            defaultValue: false,
             bindable: false,
             onChange: function(x) {
                 this.init();

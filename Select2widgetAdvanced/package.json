@@ -7,14 +7,14 @@
     "contributors": [
         "Vegar Ringdal"
     ],
-    "version": "1.0.6",
+    "version": "1.0.7",
     "copyright": "(c) 2014 Vegar Ringdal",
     "repository": {
         "type": "git",
         "url": "https://github.com/vegarringdal/Select2WidgetAdvanced"
     },
     "keywords": ["wakanda", "widget"],
-    "engines": {"wakanda": ["9", "10"]},
+    "engines": {"wakanda": ["10"]},
     "license": "MIT",
     "loadDependencies": [
         {"id": "Widget_V2"},
